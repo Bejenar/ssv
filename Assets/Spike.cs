@@ -1,17 +1,32 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Spike : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D col)
+    private PlayerHealth _playerHealth;
+
+    public float coolDownTime = 1f;
+
+    public float currentCooldown;
+
+    private void Awake()
+    {
+        _playerHealth = FindObjectOfType<PlayerHealth>();
+    }
+
+    private void Update()
+    {
+        currentCooldown -= Time.deltaTime;
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
-            Debug.Log("Spike enter, losing level ");
-            SceneManager.LoadScene("Lose");
+            if (currentCooldown <= 0)
+            {
+                _playerHealth.TakeDamage(1);
+                currentCooldown = coolDownTime;
+            }
         }
     }
 }

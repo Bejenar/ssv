@@ -102,6 +102,7 @@ MonoBehaviour:
   onCollect:
     m_PersistentCalls:
       m_Calls: []
+  sfx: {fileID: 8300000, guid: 1e90b49c8a63e354f90c54dcd1e7a3b8, type: 3}
 --- !u!61 &-7306854894426691801
 BoxCollider2D:
   m_ObjectHideFlags: 0

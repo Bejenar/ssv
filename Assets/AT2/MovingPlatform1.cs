@@ -8,6 +8,8 @@ public class MovingPlatform : MonoBehaviour
 
     public Transform[] points;
 
+    public bool isDestroyable;
+
     private int i;
 
     // Start is called before the first frame update
@@ -38,6 +40,11 @@ public class MovingPlatform : MonoBehaviour
         if (other.collider.CompareTag("Player"))
         {
             other.transform.SetParent(transform);
+            if (isDestroyable)
+            {
+                Invoke(nameof(Destruct), 2f);
+                isDestroyable = false;
+            }
         }
     }
 
@@ -47,5 +54,10 @@ public class MovingPlatform : MonoBehaviour
         {
             other.transform.SetParent(null);
         }
+    }
+
+    private void Destruct()
+    {
+        Destroy(gameObject);
     }
 }

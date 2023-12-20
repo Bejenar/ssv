@@ -7,6 +7,8 @@ public class Collectible : MonoBehaviour
     public int score;
     public UnityEvent onCollect;
 
+    public AudioClip sfx;
+
     private void Awake()
     {
         _menu = FindObjectOfType<Menu>();
@@ -18,6 +20,7 @@ public class Collectible : MonoBehaviour
         {
             _menu.AddScore(score);
             onCollect?.Invoke();
+            AudioSource.PlayClipAtPoint(sfx, transform.position, Menu.SoundVolume);
             Destroy(gameObject);
         }
     }
